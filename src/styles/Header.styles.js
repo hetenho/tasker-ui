@@ -5,8 +5,8 @@ export const header = css`
   height: ${Theme.headerHeight}px;
   color: rebeccapurple;
   font-family: ${Theme.fontHeading}, cursive;
-  letter-spacing: 0px;
   text-transform: uppercase;
+  font-weight: bold;
   background-color: ${Theme.colorWhite};
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   position: relative;
