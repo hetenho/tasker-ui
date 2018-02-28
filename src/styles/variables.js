@@ -26,5 +26,6 @@ export const Theme = {
   colorWhite: white,
   headerHeight: base*2.5,
   font,
-  fontHeading
+  fontHeading,
+  trackWidth: "25%"
 };
