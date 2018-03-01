@@ -1,31 +1,81 @@
 import React, { Component } from 'react';
-import { DragDropContext } from "react-beautiful-dnd";
 import Header from '../components/Header';
-import Track from "../components/board/Track";
-import { board } from '../styles/Board.styles';
+import Board from '../components/board/Board';
 
 class BoardContainer extends Component {
-  onDragStart = () => {
-    console.log('drag started!');
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showAddBoard: false,
+      boardTitle: "",
+      board: null
+    };
+
+    this.fetchBoard();
+  }
+  addNewBoard = title => {
+    fetch("http://localhost:3010/boards", {
+      method: "POST",
+      body: JSON.stringify({ title }),
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("TASKER_TOKEN")
+      })
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+      })
+      .catch(e => {});
   };
-  onDragUpdate = () => {
+  fetchBoard = () => {
+    const boardId = 3;
+    fetch(`http://localhost:3010/boards/${boardId}`, {
+      method: "GET",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("TASKER_TOKEN")
+      })
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        this.setState({ board: res.board });
+      })
+      .catch(e => {});
   };
-  onDragEnd = () => {
-    console.log('drag stopped');
+
+  addNewTrack = () => {
+    const boardId = 3;
+    fetch(`http://localhost:3010/boards/${boardId}/tracks`, {
+      method: "POST",
+      body: JSON.stringify({ title: 'New track', boardId }),
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("TASKER_TOKEN")
+      })
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+        // Should receive the board with tracks included in the JSON Object
+        this.setState({ board: res.board });
+      })
+      .catch(e => {});
   };
+
   render() {
-    return <div>
+    return (
+      <div>
         <Header />
-        <DragDropContext onDragStart={this.onDragStart} onDragUpdate={this.onDragUpdate} onDragEnd={this.onDragEnd}>
-          <div className={board}>
-            <Track title="Backlog" />
-            <Track title="Selected for development" />
-            <Track title="In progress" />
-            <Track title="In testing" />
-            <Track title="Done" />
-          </div>
-        </DragDropContext>
-      </div>;
+        <Board
+          board={this.state.board}
+          add={this.addNewBoard}
+          addTrack={this.addNewTrack}
+        />
+      </div>
+    );
   }
 }
 

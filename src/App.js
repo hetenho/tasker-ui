@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router';
+import { Switch, Route, Redirect } from 'react-router';
 import LoginAndRegisterContainer from "./containers/LoginAndRegisterContainer";
 import BoardContainer from "./containers/BoardContainer";
 import { app, top } from './styles/App.styles';
 import logo from './logo.svg';
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      localStorage.getItem("TASKER_TOKEN") ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to="/signin" />
+      )
+    }
+  />
+);
 
 class App extends Component {
   render() {
@@ -12,7 +25,7 @@ class App extends Component {
         <Switch>
           <Route path="/signup" component={LoginAndRegisterContainer} />
           <Route path="/signin" component={LoginAndRegisterContainer} />
-          <Route path="/" component={BoardContainer} />
+          <PrivateRoute path="/" component={BoardContainer} />
         </Switch>
       </div>;
   }
