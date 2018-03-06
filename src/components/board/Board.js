@@ -6,7 +6,7 @@ import { board } from '../../styles/Board.styles';
 class Board extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
+
     this.state = {
       boardTitle: '',
       showAddBoard: false
@@ -31,6 +31,31 @@ class Board extends Component {
         </button>;
     }
     return <DragDropContext onDragStart={this.onDragStart} onDragUpdate={this.onDragUpdate} onDragEnd={this.onDragEnd}>
+        <BoardActions {...this.props} />
+        <div className={board}>
+          {this.props.board.tracks &&
+            this.props.board.tracks.map(track => (
+              <Track title={track.title} key={track.id} />
+            ))}
+        </div>
+      </DragDropContext>;
+  }
+}
+
+class BoardActions extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      boardTitle: '',
+      showAddBoard: false,
+      showAddTask: false,
+      taskTitle: '',
+      taskDesc: ''
+    };
+  }
+  render() {
+    return <div>
         <button type="button" onClick={() => this.setState({
               showAddBoard: !this.state.showAddBoard
             })}>
@@ -47,14 +72,30 @@ class Board extends Component {
               Add
             </button>
           </div>}
-        <div className={board}>
-          {this.props.board.tracks &&
-            this.props.board.tracks.map(track => (
-              <Track title={track.title} key={track.id} />
-            ))}
-        </div>
-      </DragDropContext>;
+        <button type="button" onClick={() => this.setState({
+              showAddTask: !this.state.showAddTask
+            })}>
+          Add new task
+        </button>
+        {this.state.showAddTask && <div>
+            <label>
+              Task title:
+              <input type="text" name="taskTitle" id="taskTitle" onChange={e => this.setState(
+                    { taskTitle: e.target.value }
+                  )} />
+            </label>
+            <label>
+              Task description:
+              <textarea name="taskTitle" id="taskTitle" onChange={e => this.setState(
+                    { taskDesc: e.target.value }
+                  )} />
+            </label>
+            <button type="button" onClick={() => this.props.addTask(this.state.taskTitle, this.state.taskDesc)}>
+              Add
+            </button>
+          </div>}
+      </div>;
   }
-}
+};
 
 export default Board;
