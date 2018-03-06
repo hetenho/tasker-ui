@@ -10,3 +10,14 @@ export const board = css`
 export const track = css`
   width: ${Theme.trackWidth};
 `;
+
+export const boardActions = css`
+  padding: ${Theme.spacingMd}px ${Theme.spacing}px ${Theme.spacing}px;
+  width: 100%;
+  text-align: right;
+`;
+
+export const actionBar = css`
+  display: inline-block;
+  text-align: center;
+`;

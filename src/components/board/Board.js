@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { DragDropContext } from "react-beautiful-dnd";
 import Track from "./Track";
-import { board } from '../../styles/Board.styles';
+import { board, boardActions, actionBar } from "../../styles/Board.styles";
 
 class Board extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.tasks);
+
     this.state = {
       boardTitle: '',
       showAddBoard: false
@@ -55,12 +55,19 @@ class BoardActions extends Component {
     };
   }
   render() {
-    return <div>
-        <button type="button" onClick={() => this.setState({
-              showAddBoard: !this.state.showAddBoard
-            })}>
-          Add new board
-        </button>
+    return <div className={boardActions}>
+        <div className={actionBar}>
+          <button className="btn" type="button" onClick={() => this.setState({
+                showAddBoard: !this.state.showAddBoard
+              })}>
+            New board
+          </button>
+          <button type="button" onClick={() => this.setState({
+                showAddTask: !this.state.showAddTask
+              })}>
+            New task
+          </button>
+        </div>
         {this.state.showAddBoard && <div>
             <label>
               Board title:
@@ -72,11 +79,6 @@ class BoardActions extends Component {
               Add
             </button>
           </div>}
-        <button type="button" onClick={() => this.setState({
-              showAddTask: !this.state.showAddTask
-            })}>
-          Add new task
-        </button>
         {this.state.showAddTask && <div>
             <label>
               Task title:
