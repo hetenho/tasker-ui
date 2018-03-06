@@ -50,7 +50,7 @@ class BoardContainer extends Component {
     const boardId = 3;
     fetch(`http://localhost:3010/boards/${boardId}/tracks`, {
       method: "POST",
-      body: JSON.stringify({ title: 'New track', boardId }),
+      body: JSON.stringify({ title: "New track", boardId }),
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: localStorage.getItem("TASKER_TOKEN")
@@ -65,6 +65,23 @@ class BoardContainer extends Component {
       .catch(e => {});
   };
 
+  addNewTask = (title, description) => {
+    const boardId = 3;
+    fetch(`http://localhost:3010/tasks`, {
+      method: "POST",
+      body: JSON.stringify({ title, description, boardId }),
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("TASKER_TOKEN")
+      })
+    })
+      .then(res => res.json())
+      .then(res => {
+        console.log(res);
+      })
+      .catch(e => {});
+  };
+
   render() {
     return (
       <div>
@@ -73,6 +90,7 @@ class BoardContainer extends Component {
           board={this.state.board}
           add={this.addNewBoard}
           addTrack={this.addNewTrack}
+          addTask={this.addNewTask}
         />
       </div>
     );
