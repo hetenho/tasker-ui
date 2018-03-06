@@ -14,10 +14,12 @@ export const track = css`
 export const boardActions = css`
   padding: ${Theme.spacingMd}px ${Theme.spacing}px ${Theme.spacing}px;
   width: 100%;
-  text-align: right;
+  display: flex;
+  align-items: center;
 `;
 
 export const actionBar = css`
   display: inline-block;
   text-align: center;
+  margin-left: auto;
 `;

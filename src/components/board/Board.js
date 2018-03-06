@@ -56,6 +56,7 @@ class BoardActions extends Component {
   }
   render() {
     return <div className={boardActions}>
+        <h3>{this.props.board.title}</h3>
         <div className={actionBar}>
           <button className="btn" type="button" onClick={() => this.setState(
                 {
