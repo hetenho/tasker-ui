@@ -57,15 +57,22 @@ class BoardActions extends Component {
   render() {
     return <div className={boardActions}>
         <div className={actionBar}>
-          <button className="btn" type="button" onClick={() => this.setState({
-                showAddBoard: !this.state.showAddBoard
-              })}>
-            New board
+          <button className="btn" type="button" onClick={() => this.setState(
+                {
+                  showAddBoard: !this.state.showAddBoard
+                }
+              )}>
+              <span>
+                <i class="material-icons">dashboard</i>
+                Add board
+              </span>
           </button>
-          <button type="button" onClick={() => this.setState({
-                showAddTask: !this.state.showAddTask
-              })}>
-            New task
+          <button className="btn" type="button" onClick={() => this.setState(
+                {
+                  showAddTask: !this.state.showAddTask
+                }
+              )}>
+              <span><i class="material-icons">assignment</i> Add task</span>
           </button>
         </div>
         {this.state.showAddBoard && <div>

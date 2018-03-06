@@ -18,17 +18,22 @@ ul {
 }
 
 button {
-  padding: 8px 16px;
-  border-radius: 3px;
+  padding: 4px 16px;
+  border-radius: 2px;
   border: none;
   background-color: #fff;
   color: rebeccapurple;
+  font-size: 14px;
   text-transform: uppercase;
-  font-size: 13px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
   outline: 0;
   transition: background-color .2s ease-in-out, color .2s ease-in-out;
   cursor: pointer;
+  font-family: 'Saira Condensed';
+}
+
+button:first-child {
+  margin-right: 8px;
 }
 
 button:hover {
@@ -51,4 +56,15 @@ button.btn-secondary {
 
 button.btn-secondary:hover {
   background-color: rebeccapurple;
+}
+
+button span {
+  display: flex;
+  align-items: center;
+}
+
+button > span > i.material-icons {
+  font-size: 14px;
+  position: relative;
+  left: -4px;
 }
