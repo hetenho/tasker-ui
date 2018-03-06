@@ -6,7 +6,7 @@ import { board } from '../../styles/Board.styles';
 class Board extends Component {
   constructor(props) {
     super(props);
-
+    console.log(this.props.tasks);
     this.state = {
       boardTitle: '',
       showAddBoard: false
@@ -35,7 +35,7 @@ class Board extends Component {
         <div className={board}>
           {this.props.board.tracks &&
             this.props.board.tracks.map(track => (
-              <Track title={track.title} key={track.id} />
+              <Track title={track.title} key={track.id} tasks={this.props.tasks} />
             ))}
         </div>
       </DragDropContext>;
