@@ -63,17 +63,19 @@ class BoardActions extends Component {
                   showAddBoard: !this.state.showAddBoard
                 }
               )}>
-              <span>
-                <i class="material-icons">dashboard</i>
-                Add board
-              </span>
+            <span>
+              <i className="material-icons">dashboard</i>
+              Add board
+            </span>
           </button>
           <button className="btn" type="button" onClick={() => this.setState(
                 {
                   showAddTask: !this.state.showAddTask
                 }
               )}>
-              <span><i class="material-icons">assignment</i> Add task</span>
+            <span>
+              <i className="material-icons">assignment</i> Add task
+            </span>
           </button>
         </div>
         {this.state.showAddBoard && <div>
